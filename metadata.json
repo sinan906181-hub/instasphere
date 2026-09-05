@@ -1,0 +1,6 @@
+{
+  "name": "MediaSphere",
+  "description": "MediaSphere — Real social platform for authentic stories, reels, posts, and real-time community.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
