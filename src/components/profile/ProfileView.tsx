@@ -106,12 +106,18 @@ export const ProfileView: React.FC = () => {
       orderBy('createdAt', 'desc')
     );
 
-    const unsub = onSnapshot(q, (snap) => {
-      const list = snap.docs
-        .map((d) => ({ id: d.id, ...d.data() }) as Post)
-        .filter((p) => !p.isRemoved);
-      setPosts(list);
-    });
+    const unsub = onSnapshot(
+      q,
+      (snap) => {
+        const list = snap.docs
+          .map((d) => ({ id: d.id, ...d.data() }) as Post)
+          .filter((p) => !p.isRemoved);
+        setPosts(list);
+      },
+      (err) => {
+        console.warn('Error fetching profile posts:', err);
+      }
+    );
 
     return () => unsub();
   }, [targetUid]);
@@ -126,12 +132,18 @@ export const ProfileView: React.FC = () => {
       orderBy('createdAt', 'desc')
     );
 
-    const unsub = onSnapshot(q, (snap) => {
-      const list = snap.docs
-        .map((d) => ({ id: d.id, ...d.data() }) as Reel)
-        .filter((r) => !r.isRemoved);
-      setReels(list);
-    });
+    const unsub = onSnapshot(
+      q,
+      (snap) => {
+        const list = snap.docs
+          .map((d) => ({ id: d.id, ...d.data() }) as Reel)
+          .filter((r) => !r.isRemoved);
+        setReels(list);
+      },
+      (err) => {
+        console.warn('Error fetching profile reels:', err);
+      }
+    );
 
     return () => unsub();
   }, [targetUid]);

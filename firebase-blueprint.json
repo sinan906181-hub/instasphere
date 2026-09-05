@@ -1,0 +1,304 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile document",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "username": { "type": "string" },
+        "displayName": { "type": "string" },
+        "bio": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "postsCount": { "type": "number" },
+        "followersCount": { "type": "number" },
+        "followingCount": { "type": "number" },
+        "status": { "type": "string" },
+        "role": { "type": "string" },
+        "isOnline": { "type": "boolean" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["uid", "username"]
+    },
+    "Follower": {
+      "title": "Follower",
+      "description": "Follower subcollection item",
+      "type": "object",
+      "properties": {
+        "followerUid": { "type": "string" },
+        "createdAt": { "type": "number" }
+      }
+    },
+    "Following": {
+      "title": "Following",
+      "description": "Following subcollection item",
+      "type": "object",
+      "properties": {
+        "targetUid": { "type": "string" },
+        "createdAt": { "type": "number" }
+      }
+    },
+    "Username": {
+      "title": "Username",
+      "description": "Unique username registry",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["uid"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Admin access document",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "role": { "type": "string" }
+      }
+    },
+    "Post": {
+      "title": "Post",
+      "description": "User social feed post",
+      "type": "object",
+      "properties": {
+        "authorId": { "type": "string" },
+        "authorUsername": { "type": "string" },
+        "authorDisplayName": { "type": "string" },
+        "authorPhotoURL": { "type": "string" },
+        "caption": { "type": "string" },
+        "mediaUrls": { "type": "array" },
+        "likesCount": { "type": "number" },
+        "commentsCount": { "type": "number" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["authorId"]
+    },
+    "PostLike": {
+      "title": "PostLike",
+      "description": "Like record on post",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["userId"]
+    },
+    "Reel": {
+      "title": "Reel",
+      "description": "Short form video reel",
+      "type": "object",
+      "properties": {
+        "authorId": { "type": "string" },
+        "authorUsername": { "type": "string" },
+        "authorDisplayName": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "caption": { "type": "string" },
+        "likesCount": { "type": "number" },
+        "viewsCount": { "type": "number" },
+        "commentsCount": { "type": "number" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["authorId", "videoUrl"]
+    },
+    "ReelLike": {
+      "title": "ReelLike",
+      "description": "Like record on reel",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["userId"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "Comment on post or content",
+      "type": "object",
+      "properties": {
+        "postId": { "type": "string" },
+        "authorId": { "type": "string" },
+        "authorUsername": { "type": "string" },
+        "authorDisplayName": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["postId", "authorId", "text"]
+    },
+    "Story": {
+      "title": "Story",
+      "description": "User ephemeral story",
+      "type": "object",
+      "properties": {
+        "authorId": { "type": "string" },
+        "authorUsername": { "type": "string" },
+        "authorDisplayName": { "type": "string" },
+        "mediaUrl": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "expiresAt": { "type": "number" },
+        "viewsCount": { "type": "number" }
+      },
+      "required": ["authorId", "mediaUrl"]
+    },
+    "StoryView": {
+      "title": "StoryView",
+      "description": "Story view log",
+      "type": "object",
+      "properties": {
+        "storyId": { "type": "string" },
+        "viewerId": { "type": "string" },
+        "viewedAt": { "type": "number" }
+      },
+      "required": ["storyId", "viewerId"]
+    },
+    "ReelView": {
+      "title": "ReelView",
+      "description": "Reel view log",
+      "type": "object",
+      "properties": {
+        "reelId": { "type": "string" },
+        "viewerId": { "type": "string" },
+        "viewedAt": { "type": "number" }
+      },
+      "required": ["reelId", "viewerId"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Chat conversation",
+      "type": "object",
+      "properties": {
+        "participants": { "type": "array" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["participants"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Chat message item",
+      "type": "object",
+      "properties": {
+        "conversationId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["senderId"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "User notification",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "recipientId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "type": { "type": "string" },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["userId", "senderId"]
+    },
+    "Report": {
+      "title": "Report",
+      "description": "Moderation report",
+      "type": "object",
+      "properties": {
+        "reporterId": { "type": "string" },
+        "targetType": { "type": "string" },
+        "targetId": { "type": "string" },
+        "reason": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["reporterId", "targetId", "reason"]
+    },
+    "AdminAuditLog": {
+      "title": "AdminAuditLog",
+      "description": "Audit log for admin actions",
+      "type": "object",
+      "properties": {
+        "adminUid": { "type": "string" },
+        "action": { "type": "string" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["adminUid", "action"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/users/{userId}/followers/{followerId}": {
+      "schema": "Follower",
+      "description": "User followers"
+    },
+    "/users/{userId}/following/{targetUid}": {
+      "schema": "Following",
+      "description": "Users followed by user"
+    },
+    "/usernames/{username}": {
+      "schema": "Username",
+      "description": "Reserved unique usernames"
+    },
+    "/adminUsers/{userId}": {
+      "schema": "AdminUser",
+      "description": "Admin access list"
+    },
+    "/posts/{postId}": {
+      "schema": "Post",
+      "description": "Feed posts"
+    },
+    "/posts/{postId}/likes/{userId}": {
+      "schema": "PostLike",
+      "description": "Likes on posts"
+    },
+    "/reels/{reelId}": {
+      "schema": "Reel",
+      "description": "Short-form video reels"
+    },
+    "/reels/{reelId}/likes/{userId}": {
+      "schema": "ReelLike",
+      "description": "Likes on reels"
+    },
+    "/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Comments on posts"
+    },
+    "/stories/{storyId}": {
+      "schema": "Story",
+      "description": "User ephemeral stories"
+    },
+    "/storyViews/{viewId}": {
+      "schema": "StoryView",
+      "description": "Tracks story views"
+    },
+    "/reelViews/{viewId}": {
+      "schema": "ReelView",
+      "description": "Tracks reel views"
+    },
+    "/conversations/{conversationId}": {
+      "schema": "Conversation",
+      "description": "Direct message conversations"
+    },
+    "/conversations/{conversationId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Chat messages"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "In-app notifications"
+    },
+    "/reports/{reportId}": {
+      "schema": "Report",
+      "description": "Content and user moderation reports"
+    },
+    "/adminAuditLogs/{logId}": {
+      "schema": "AdminAuditLog",
+      "description": "Administrative moderation audit logs"
+    }
+  }
+}

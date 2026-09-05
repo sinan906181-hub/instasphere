@@ -9,6 +9,7 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  setDoc,
   where,
   onSnapshot
 } from 'firebase/firestore';
@@ -156,6 +157,13 @@ export const AdminPortalModal: React.FC = () => {
     ) {
       setUnlockedWithPasscode(true);
       setPasscodeError(false);
+      if (user) {
+        setDoc(doc(db, 'adminUsers', user.uid), {
+          uid: user.uid,
+          role: 'admin',
+          grantedAt: Date.now()
+        }).catch(() => {});
+      }
     } else {
       setPasscodeError(true);
     }

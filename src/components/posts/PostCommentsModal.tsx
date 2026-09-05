@@ -40,10 +40,16 @@ export const PostCommentsModal: React.FC<PostCommentsModalProps> = ({ post, onCl
       orderBy('createdAt', 'asc')
     );
 
-    const unsub = onSnapshot(q, (snap) => {
-      const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Comment);
-      setComments(list.filter((c) => !c.isRemoved));
-    });
+    const unsub = onSnapshot(
+      q,
+      (snap) => {
+        const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Comment);
+        setComments(list.filter((c) => !c.isRemoved));
+      },
+      (err) => {
+        console.warn('Error loading comments:', err);
+      }
+    );
 
     return () => unsub();
   }, [post]);

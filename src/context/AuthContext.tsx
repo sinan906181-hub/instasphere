@@ -241,9 +241,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       where('read', '==', false)
     );
 
-    const unsub = onSnapshot(q, (snap) => {
-      setUnreadNotificationsCount(snap.size);
-    });
+    const unsub = onSnapshot(
+      q,
+      (snap) => {
+        setUnreadNotificationsCount(snap.size);
+      },
+      (err) => {
+        console.warn('Notifications snapshot error:', err);
+      }
+    );
 
     return () => unsub();
   }, [user]);

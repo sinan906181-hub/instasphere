@@ -95,10 +95,16 @@ export const ChatView: React.FC = () => {
       orderBy('timestamp', 'asc')
     );
 
-    const unsub = onSnapshot(q, (snap) => {
-      const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as ChatMessage);
-      setMessages(list);
-    });
+    const unsub = onSnapshot(
+      q,
+      (snap) => {
+        const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as ChatMessage);
+        setMessages(list);
+      },
+      (err) => {
+        console.warn('Error fetching messages:', err);
+      }
+    );
 
     return () => unsub();
   }, [activeChat]);
